@@ -13,3 +13,6 @@
 [submodule "knowledge/riscv-isa-sim"]
 	path = knowledge/riscv-isa-sim
 	url = https://github.com/riscv-software-src/riscv-isa-sim.git
+[submodule "knowledge/XiangShan-doc"]
+	path = knowledge/XiangShan-doc
+	url = https://github.com/OpenXiangShan/XiangShan-doc.git
