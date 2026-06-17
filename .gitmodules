@@ -1,0 +1,3 @@
+[submodule "assistant/pi-mono"]
+	path = assistant/pi-mono
+	url = git@github.com:davine47/pi-mono.git
