@@ -17,6 +17,8 @@ docs-target/
 *.o
 *.out
 *~
+build/
+*.d
 /examples
 *.vcd
 .addons-dont-touch
