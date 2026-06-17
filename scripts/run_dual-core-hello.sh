@@ -1,41 +1,37 @@
 #!/bin/bash
 # AI[DeepSeek V4 Pro, high] GENERATED BEGIN
-# Run script: simulate gestalt-tests hello test with Spike (riscv-isa-sim)
+# Run script: simulate gestalt-tests dual-core-hello on Spike with 2 harts
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 SPIKE="${PROJECT_DIR}/knowledge/riscv-isa-sim/build/spike"
-TEST_DIR="${PROJECT_DIR}/src/hello"
-BINARY="${TEST_DIR}/build/hello-riscv64-cb-v1.bin"
-ELF="${TEST_DIR}/build/hello-riscv64-cb-v1.elf"
+TEST_DIR="${PROJECT_DIR}/src/dual-core-hello"
+ELF="${TEST_DIR}/build/dual-core-hello-riscv64-cb-v1.elf"
 
 echo "============================================"
-echo "  Running hello test on Spike simulator"
+echo "  Running dual-core-hello on Spike (2 harts)"
 echo "============================================"
 
 # Check spike
 if [ ! -x "${SPIKE}" ]; then
     echo "ERROR: Spike not found at ${SPIKE}"
-    echo "Please build riscv-isa-sim first:"
-    echo "  cd ${PROJECT_DIR}/knowledge/riscv-isa-sim && mkdir -p build && cd build && ../configure && make -j\$(nproc)"
     exit 1
 fi
 
 # Check binary
-if [ ! -f "${BINARY}" ]; then
-    echo "ERROR: Binary not found at ${BINARY}"
-    echo "Please run build_hello.sh first."
+if [ ! -f "${ELF}" ]; then
+    echo "ERROR: ELF not found at ${ELF}"
+    echo "Please run build_dual-core-hello.sh first."
     exit 1
 fi
 
-# Run with Spike
-# --isa=rv64gc covers rv64imafdc_zicsr_zifencei
-echo "Spike command: ${SPIKE} --isa=rv64gc ${ELF}"
+# Run with Spike: -p2 for 2 processors
+echo "Spike command: ${SPIKE} --isa=rv64gc -p2 ${ELF}"
 echo ""
 
-${SPIKE} --isa=rv64gc ${ELF}
+${SPIKE} --isa=rv64gc -p2 ${ELF}
 
 EXIT_CODE=$?
 echo ""

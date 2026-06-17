@@ -11,8 +11,8 @@ volatile uint64_t tohost   __attribute__((section(".htif")));
 volatile uint64_t fromhost __attribute__((section(".htif")));
 
 // AI[DeepSeek V4 Pro, high] GENERATED BEGIN
-// Override _trm_init for Spike: skip UARTLITE init and use HTIF
-// This prevents linking trm.o from the AM archive (which uses
+// Override _trm_init for Spike: skip UARTLITE init and use HTIF.
+// This prevents linking trm.o from the AM archive (which targets
 // UARTLITE MMIO at 0x40600000, unsupported by Spike).
 extern char _heap_start;
 extern char _pmem_end;
